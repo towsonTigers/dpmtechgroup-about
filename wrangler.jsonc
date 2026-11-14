@@ -1,0 +1,40 @@
+{
+  "name": "dpmtechgroup",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-01",
+
+  // Static site. The Worker script only runs for /api/* requests.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Cloudflare Workers AI (used by the chat assistant)
+  "ai": { "binding": "AI" },
+
+  // Max 10 chat messages per visitor IP per minute
+  "ratelimits": [
+    {
+      "name": "CHAT_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 10, "period": 60 }
+    }
+  ],
+
+  // Optional overrides. To use Claude instead of Workers AI:
+  //   npx wrangler secret put ANTHROPIC_API_KEY
+  "vars": {
+    "WORKERS_AI_MODEL": "@cf/meta/llama-4-scout-17b-16e-instruct",
+    "CLAUDE_MODEL": "claude-haiku-5-5"
+  },
+
+  "observability": { "enabled": true },
+
+  "routes": [
+    { "pattern": "dpmtechgroup.com", "custom_domain": true },
+    { "pattern": "www.dpmtechgroup.com", "custom_domain": true }
+  ],
+  "workers_dev": false
+}
