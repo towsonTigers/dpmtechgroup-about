@@ -10,7 +10,20 @@
   <meta property="og:description" content="Architecture, cloud modernization, and DevOps consulting led by David P. Morris Jr.">
   <meta property="og:url" content="https://dpmtechgroup.com/">
   <meta property="og:type" content="website">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230f2a3d'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='30' fill='%23e8b04b'>D</text></svg>">
+  <meta property="og:image" content="https://dpmtechgroup.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DPM Tech Group — Architecture that carries legacy systems into the cloud.">
+  <meta property="og:site_name" content="DPM Tech Group">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DPM Tech Group — Enterprise Architecture & Cloud Consulting">
+  <meta name="twitter:description" content="Architecture, cloud modernization, and DevOps consulting led by David P. Morris Jr.">
+  <meta name="twitter:image" content="https://dpmtechgroup.com/og-image.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230f2a3d'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='30' fill='%23e8b04b'>D</text></svg>">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0f2a3d">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -19,7 +32,15 @@
   <div class="wrap nav">
     <a class="brand" href="#top">DPM <span>Tech</span> Group</a>
     <nav aria-label="Main">
-      <ul>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainMenu" aria-label="Open menu">
+        <svg class="i-menu" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+          <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <svg class="i-close" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <ul id="mainMenu">
         <li><a class="link" href="#services">Services</a></li>
         <li><a class="link" href="#about">About</a></li>
         <li><a class="link" href="#approach">Approach</a></li>
@@ -134,7 +155,7 @@
       </div>
       <figure class="howiwork-media">
         <video id="howVideo" muted playsinline loop preload="none" poster="how-i-work-poster.jpg" aria-label="Video: Python code describing DPM Tech Group being typed in a code editor and run in the terminal">
-          <source src="how-i-work.mp4" type="video/mp4">
+          <source src="terraform-ecs-30s.mp4" type="video/mp4">
         </video>
       </figure>
     </div>
@@ -216,6 +237,33 @@
         }
       });
     }, { threshold: 0.5 }).observe(video);
+  })();
+
+  // Mobile menu: toggle, close on link tap, Escape, or widening past the breakpoint
+  (function () {
+    var toggle = document.querySelector('.nav-toggle');
+    var menu = document.getElementById('mainMenu');
+    if (!toggle || !menu) return;
+    var wide = window.matchMedia('(min-width: 761px)');
+
+    function setOpen(open) {
+      menu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.classList.contains('open')) { setOpen(false); toggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (menu.classList.contains('open') && !e.target.closest('.nav')) setOpen(false);
+    });
+    wide.addEventListener('change', function () { if (wide.matches) setOpen(false); });
   })();
 </script>
 <script src="chat.js" defer></script>
