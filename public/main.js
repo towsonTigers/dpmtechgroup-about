@@ -77,4 +77,31 @@
     });
     wide.addEventListener('change', function () { if (wide.matches) setOpen(false); });
   })();
+    // Talks & Demos: open a YouTube video in a pop-up player; stop it on close
+  (function () {
+    var dialog = document.getElementById('videoDialog');
+    var frame = document.getElementById('videoFrame');
+    if (!dialog || !frame || typeof dialog.showModal !== 'function') return;
+    var heading = document.getElementById('videoDialogTitle');
+    var lastCard = null;
+
+    document.querySelectorAll('.video-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var id = card.getAttribute('data-video-id');
+        var title = card.getAttribute('data-video-title') || 'Video';
+        lastCard = card;
+        heading.textContent = title;
+        frame.title = title;
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelector('.video-dialog-close').addEventListener('click', function () { dialog.close(); });
+    dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); }); // click outside the player
+    dialog.addEventListener('close', function () {
+      frame.src = '';                       // stops playback
+      if (lastCard) lastCard.focus();       // return keyboard focus to the card
+    });
+  })();
 })();

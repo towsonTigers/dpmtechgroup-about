@@ -43,6 +43,7 @@
       <ul id="mainMenu">
         <li><a class="link" href="#services">Services</a></li>
         <li><a class="link" href="#about">About</a></li>
+        <li><a class="link" href="#talks">Talks</a></li>
         <li><a class="link" href="#approach">Approach</a></li>
         <li><a class="link" href="#contact">Contact</a></li>
       </ul>
@@ -160,7 +161,45 @@
       </figure>
     </div>
   </section>
+  
+  <section id="talks" class="talks">
+    <div class="wrap">
+      <h2>Talks &amp; Demos</h2>
+      <p class="section-intro">Conference talks and walkthroughs on testing, architecture and cloud delivery.</p>
+      <ul class="video-grid">
+        <li>
+          <button class="video-card" type="button" data-video-id="XgUa-TqjmiE"
+                  data-video-title="Modern React Backend Testing: Replacing Fragile Mocks with SQLite">
+            <span class="video-thumb">
+              <img src="https://i.ytimg.com/vi/XgUa-TqjmiE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+              <span class="video-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+              </span>
+              <span class="video-length">20:18</span>
+            </span>
+            <span class="video-body">
+              <span class="video-title">Modern React Backend Testing: Replacing Fragile Mocks with SQLite</span>
+              <span class="video-desc">Stop stubbing out SQL calls behind fake interfaces. If you need to test real SQL in CI/CD, consider SQLite.</span>
+              <span class="video-meta">Conference talk &middot; 20 min</span>
+            </span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
 
+  <dialog class="video-dialog" id="videoDialog" aria-labelledby="videoDialogTitle">
+    <div class="video-dialog-head">
+      <h3 id="videoDialogTitle"></h3>
+      <button type="button" class="video-dialog-close" aria-label="Close video">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="video-frame">
+      <iframe id="videoFrame" title="" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </dialog>
   <section id="approach" class="approach">
     <div class="wrap">
       <p class="section-intro">A straightforward engagement model built for clarity at every step.</p>
